@@ -169,3 +169,42 @@ a {
   color: white;
   font-size: 18px;
 }
+
+.LoginView, .SignupView {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: var(--ui-shadow);
+}
+
+.FormGroup {
+  margin-bottom: 15px;
+}
+
+.FormGroup label {
+  display: block;
+  font-size: 14px;
+  color: #2a3747;
+}
+
+.FormGroup input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #fa4141;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #e63939;
+}

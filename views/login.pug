@@ -1,0 +1,17 @@
+extends layout
+
+block layout-content
+  div.View.LoginView
+    h1.Banner Login
+    div.Message
+      form(action="/login", method="POST")
+        div.FormGroup
+          label(for="username") Username
+          input(type="text", id="username", name="username", required)
+        div.FormGroup
+          label(for="password") Password
+          input(type="password", id="password", name="password", required)
+        button(type="submit") Login
+    div.NavButtons
+      a(href="/signup")
+        div.NavButton Sign Up
