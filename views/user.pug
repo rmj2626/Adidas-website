@@ -1,0 +1,14 @@
+extends layout
+
+block layout-content
+  div.View.UserView
+    h1.Banner Hey there, #{userProfile.nickname}!
+    div.Message
+      div.Title
+        h3 Let's find the best-fit for you!
+        h1 Max out your   
+        h1 training regime
+      pre.Details= "Get a Predator suited for your needs"
+    div.NavButtons
+      a(href="/ground")
+        div.NavButton Select Ground Type
