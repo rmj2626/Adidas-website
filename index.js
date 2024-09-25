@@ -4,9 +4,6 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const port = process.env.PORT || 8000;
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server running on http://0.0.0.0:${port}`);
-});
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -118,6 +115,6 @@ app.get("/FG", (req, res) => {
     res.render("FG", { title: "Football Ground" });
 });
 
-app.listen(port, () => {
-    console.log(`Listening to requests on http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on http://0.0.0.0:${port}`);
 });
