@@ -208,3 +208,145 @@ button {
 button:hover {
   background-color: #e63939;
 }
+
+.boot-img{
+  margin-top: -90px;
+  margin-bottom: -70px;
+}
+
+.Message2{
+  background: white;
+  padding: 30px;
+  border-bottom: var(--ui-shadow-border);
+  box-shadow: var(--ui-shadow);
+  /* margin-bottom: -55px; */
+}
+
+.Message2 > .Title {
+  padding-bottom: 20px;
+}
+
+/* Flex container for Order Form, Product Image, and Estimated Delivery */
+.OrderContainer {
+  display: flex;
+  justify-content: space-between; /* Space between the form, product image, and estimated delivery */
+  align-items: flex-start; /* Align items at the top */
+}
+
+/* Styling for the form */
+.Message2 {
+  flex: 1; /* Take up remaining space */
+  margin-right: 20px; /* Space between the form and product image */
+}
+
+/* Styling for the product image section */
+.ProductImage {
+  flex-basis: 20%; /* Take up 20% of the container width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.ProductImage img {
+  max-width: 100%;
+  height: auto;
+  box-shadow: var(--ui-shadow);
+  border-radius: 5px;
+}
+
+/* Styling for the estimated delivery section */
+.EstimatedDelivery {
+  flex-basis: 30%; /* Take up 30% of the container width */
+  background-color: #f9f9f9;
+  padding: 20px;
+  box-shadow: var(--ui-shadow);
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Map Section styling */
+.MapSection {
+  flex-basis: 20%; /* Take full width */
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.MapSection h3 {
+  margin-bottom: 15px;
+  font-size: 24px;
+  color: #2a3747;
+}
+
+.MapSection iframe {
+  width: 100%;
+  max-width: 600px;
+  height: 450px;
+  border: none;
+  box-shadow: var(--ui-shadow);
+  border-radius: 5px;
+}
+
+/* Flex container for the order form and product image
+.OrderContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+/* Styling the product image */
+/* .ProductImage {
+  flex-basis: 30%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.ProductImage img {
+  max-width: 100%;
+  height: auto;
+  box-shadow: var(--ui-shadow);
+  border-radius: 5px;
+} */
+
+/* Flex container for Estimated Delivery and Map (stacked vertically) */
+/* .DeliveryMapContainer {
+  flex-basis: 30%;
+  display: flex;
+  flex-direction: column; /* Stack items in a column */
+  /* align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+}  */
+
+/* Map Section styling */
+/* .MapSection {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.MapSection h3 {
+  margin-bottom: 15px;
+  font-size: 24px;
+  color: #2a3747;
+}
+
+.MapSection iframe {
+  width: 100%;
+  max-width: 600px;
+  height: 450px;
+  border: none;
+  box-shadow: var(--ui-shadow);
+  border-radius: 5px;
+} */
+
+/* Estimated Delivery section */
+/* .EstimatedDelivery {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 18px;
+} */

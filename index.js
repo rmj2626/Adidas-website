@@ -1,7 +1,6 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
-const { title } = require("process");
 
 const app = express();
 const port = process.env.PORT || "8000";
@@ -14,20 +13,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Sample user storage (replace with a database in a real application)
 let users = [];
 
-// Login route
+// Login page route (GET)
+app.get("/login", (req, res) => {
+  res.render("login", { title: "Login" });
+});
+
+// Login route (POST)
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
   const user = users.find(u => u.username === username && u.password === password);
   if (user) {
     // Handle successful login
-    res.redirect("/index", { title: "Home"}); // Redirect to home or dashboard
+    res.redirect("/home"); // Redirect to a home or dashboard page
   } else {
     // Handle login error
     res.render("login", { title: "Login", error: "Invalid credentials" });
   }
 });
 
-// Signup route
+// Signup page route (GET)
+app.get("/signup", (req, res) => {
+  res.render("signup", { title: "Sign Up" });
+});
+
+// Signup form submission route (POST)
 app.post("/signup", (req, res) => {
   const { username, email, password } = req.body;
   // Check if the user already exists
@@ -42,8 +51,41 @@ app.post("/signup", (req, res) => {
   }
 });
 
+// Logout route (GET)
+app.get("/logout", (req, res) => {
+  // Logic for handling logout can be added here if needed
+  res.redirect("/login"); // Redirect to login after logging out
+});
+
+// Order page route (GET)
+app.get("/order", (req, res) => {
+  res.render("Order", { title: "Order" });
+});
+
+app.post("/order", (req, res) => {
+  const { name, email, phone, address1, address2, city, state } = req.body;
+
+  // Constructing the delivery address
+  const address = `${address1}, ${address2 ? address2 + ', ' : ''}${city}, ${state}`;
+  
+  // Calculate estimated delivery date
+  const today = new Date();
+  const deliveryDate = new Date(today.setDate(today.getDate() + 7));
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const estimatedDate = deliveryDate.toLocaleDateString('en-US', options);
+
+  // Render thank you page with address and estimated delivery date
+  res.render("thankyou", { title: "Thank You", address, estimatedDate });
+});
+
+// Other routes...
 app.get("/", (req, res) => {
     res.render("login", { title: "Login" });
+});
+
+// Home page route (GET)
+app.get("/home", (req, res) => {
+  res.render("index", { title: "Home" }); // Render the home page with the title
 });
 
 app.get("/user", (req, res) => {
