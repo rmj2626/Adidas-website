@@ -1,0 +1,9 @@
+extends layout
+
+block layout-content
+  h1 Your Orders
+
+  ul
+    each order in orders
+      li
+        | #{order.name} - #{order.estimated_delivery_date}
