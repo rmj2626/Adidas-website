@@ -364,3 +364,14 @@ button:hover {
 .Message {
   margin-top: 15px; /* Space above message section */
 }
+
+.VideoSection {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.VideoSection video {
+  border-radius: 10px;
+  box-shadow: var(--ui-shadow);
+}
