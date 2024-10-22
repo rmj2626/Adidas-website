@@ -145,6 +145,7 @@ app.post("/order", (req, res) => {
   const deliveryDate = new Date();
   deliveryDate.setDate(deliveryDate.getDate() + 7);
 
+  // Insert the order with address details and formatted date
   const insertOrderQuery = `INSERT INTO orders (user_id, name, email, phone, address, city, state, estimated_delivery_date)
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
   db.query(insertOrderQuery, [userId, name, email, phone, address, city, state, deliveryDate], (err, result) => {
@@ -152,7 +153,10 @@ app.post("/order", (req, res) => {
       return res.status(500).send("Database error");
     }
 
-    res.render("thankyou", { title: "Thank You", address, estimatedDate: deliveryDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) });
+    // Format the date properly without the time
+    const formattedDate = deliveryDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    
+    res.render("thankyou", { title: "Thank You", address, estimatedDate: formattedDate });
   });
 });
 
@@ -170,6 +174,7 @@ app.get("/orders", (req, res) => {
       return res.status(500).send("Database error");
     }
 
+    // Pass both the order details and address to the orders.pug file
     res.render("orders", { title: "Your Orders", orders: results });
   });
 });

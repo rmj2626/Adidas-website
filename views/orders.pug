@@ -6,4 +6,8 @@ block layout-content
   ul
     each order in orders
       li
-        | #{order.name} - #{order.estimated_delivery_date}
+        | #{order.name} - #{order.address}, #{order.city}, #{order.state} - #{order.estimated_delivery_date}
+
+  div.NavButtons
+    a(href="/home")
+      button Back to Home
