@@ -5,7 +5,7 @@ block layout-content
     h1.Banner Sign Up
     div.Message
       if error
-        div.Alert Error: #{error}  // Display error message if it exists
+        div.Alert Error: #{error}
       form(action="/signup", method="POST")
         div.FormGroup
           label(for="username") Username
