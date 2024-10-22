@@ -3,6 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mysql = require('mysql2');
 const session = require('express-session'); // Import session middleware
+const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 const app = express();
@@ -49,25 +50,30 @@ app.get("/login", (req, res) => {
   res.render("login", { title: "Login" });
 });
 
-// Login route (POST)
+// Enhanced Login route (POST)
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
   
-  const query = `SELECT * FROM users WHERE username = ? AND password = ?`;
-  db.query(query, [username, password], (err, results) => {
+  const query = `SELECT * FROM users WHERE username = ?`;
+  db.query(query, [username], (err, results) => {
     if (err) {
       return res.status(500).render("login", { title: "Login", error: "Database error" });
     }
 
     if (results.length > 0) {
-      // Store user information in the session
-      req.session.user = results[0];
-      
-      // Redirect to the home page after successful login
-      res.redirect("/home");
+      const user = results[0];
+      // Compare the entered password with the hashed password
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (result) {
+          // Correct password, store user session
+          req.session.user = user;
+          res.redirect("/home");
+        } else {
+          res.render("login", { title: "Login", error: "Incorrect password" });
+        }
+      });
     } else {
-      // Invalid credentials
-      res.render("login", { title: "Login", error: "Invalid credentials" });
+      res.render("login", { title: "Login", error: "User not found" });
     }
   });
 });
@@ -77,39 +83,43 @@ app.get("/signup", (req, res) => {
   res.render("signup", { title: "Sign Up" });
 });
 
-// Signup form submission route (POST)
+// Enhanced Signup route (POST)
 app.post("/signup", (req, res) => {
   const { username, email, password } = req.body;
 
   // Check if the user already exists
-  const checkQuery = `SELECT * FROM users WHERE username = ?`;
-  db.query(checkQuery, [username], (err, results) => {
+  const checkQuery = `SELECT * FROM users WHERE username = ? OR email = ?`;
+  db.query(checkQuery, [username, email], (err, results) => {
     if (err) {
       return res.status(500).render("signup", { title: "Sign Up", error: "Database error" });
     }
 
     if (results.length > 0) {
-      res.render("signup", { title: "Sign Up", error: "User already exists" });
+      res.render("signup", { title: "Sign Up", error: "User with this username or email already exists" });
     } else {
-      // Add the new user to the database
-      const insertQuery = `INSERT INTO users (username, email, password) VALUES (?, ?, ?)`;
-      db.query(insertQuery, [username, email, password], (err, result) => {
+      // Hash the password before saving to the database
+      bcrypt.hash(password, 10, (err, hashedPassword) => {
         if (err) {
-          return res.status(500).render("signup", { title: "Sign Up", error: "Database error" });
+          return res.status(500).render("signup", { title: "Sign Up", error: "Error creating account" });
         }
 
-        // After successful signup, automatically log the user in
-        const newUserQuery = `SELECT * FROM users WHERE id = ?`;  // Retrieve the newly created user
-        db.query(newUserQuery, [result.insertId], (err, userResult) => {
+        // Add the new user to the database with the hashed password
+        const insertQuery = `INSERT INTO users (username, email, password) VALUES (?, ?, ?)`;
+        db.query(insertQuery, [username, email, hashedPassword], (err, result) => {
           if (err) {
             return res.status(500).render("signup", { title: "Sign Up", error: "Database error" });
           }
 
-          // Store the newly signed-up user in the session
-          req.session.user = userResult[0];
-          
-          // Redirect to home page or another desired page
-          res.redirect("/home");
+          // After successful signup, log the user in
+          const newUserQuery = `SELECT * FROM users WHERE id = ?`; 
+          db.query(newUserQuery, [result.insertId], (err, userResult) => {
+            if (err) {
+              return res.status(500).render("signup", { title: "Sign Up", error: "Database error" });
+            }
+
+            req.session.user = userResult[0];
+            res.redirect("/home");
+          });
         });
       });
     }
