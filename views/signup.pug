@@ -3,20 +3,22 @@ extends layout
 block layout-content
   div.View.SignupView
     h1.Banner Sign Up
-    div.Message
-      if error
-        div.Alert Error: #{error}  // Display error message if it exists
-      form(action="/signup", method="POST")
-        div.FormGroup
-          label(for="username") Username
-          input(type="text", id="username", name="username", required)
-        div.FormGroup
-          label(for="email") Email
-          input(type="email", id="email", name="email", required)
-        div.FormGroup
-          label(for="password") Password
-          input(type="password", id="password", name="password", required)
-        button(type="submit") Sign Up
+    script.
+      // Display alert if there is an error
+      if (#{JSON.stringify(error)}) {
+        alert("Error: #{error}");
+      }
+    form(action="/signup", method="POST")
+      div.FormGroup
+        label(for="username") Username
+        input(type="text", id="username", name="username", required)
+      div.FormGroup
+        label(for="email") Email
+        input(type="email", id="email", name="email", required)
+      div.FormGroup
+        label(for="password") Password
+        input(type="password", id="password", name="password", required)
+      button(type="submit") Sign Up
     div.NavButtons
       a(href="/login")
         div.NavButton Login

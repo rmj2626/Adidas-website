@@ -3,17 +3,19 @@ extends layout
 block layout-content
   div.View.LoginView
     h1.Banner Login
-    div.Message
-      if error
-        div.Alert Error: #{error}  // Display error message if it exists
-      form(action="/login", method="POST")
-        div.FormGroup
-          label(for="username") Username
-          input(type="text", id="username", name="username", required)
-        div.FormGroup
-          label(for="password") Password
-          input(type="password", id="password", name="password", required)
-        button(type="submit") Login
+    script.
+      // Display alert if there is an error
+      if (#{JSON.stringify(error)}) {
+        alert("Error: #{error}");
+      }
+    form(action="/login", method="POST")
+      div.FormGroup
+        label(for="username") Username
+        input(type="text", id="username", name="username", required)
+      div.FormGroup
+        label(for="password") Password
+        input(type="password", id="password", name="password", required)
+      button(type="submit") Login
     div.NavButtons
       a(href="/signup")
         div.NavButton Sign Up
