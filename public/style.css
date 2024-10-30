@@ -118,17 +118,17 @@ a {
 }
 
 .WelcomeView {
-  background: url("https://adidas-website-images.s3.ap-south-1.amazonaws.com/public/images/boots.jpg") left bottom;
+  background: url("https://1fabucket.s3.ap-south-1.amazonaws.com/boots.jpg") left bottom;
   background-size: cover;
 }
 
 .UserView {
-  background: url("https://adidas-website-images.s3.ap-south-1.amazonaws.com/public/images/boots2.jpg") left bottom;
+  background: url("https://1fabucket.s3.ap-south-1.amazonaws.com/boots2.jpg") left bottom;
   background-size: cover;
 }
 
 .FGView {
-  background: url("https://adidas-website-images.s3.ap-south-1.amazonaws.com/public/images/FG_ground.jpeg") no-repeat center center; /* Specify your image path */
+  background: url("https://1fabucket.s3.ap-south-1.amazonaws.com/FG_ground.jpeg") no-repeat center center; /* Specify your image path */
   background-size: cover;
   height: 45vh;
   width: 100%;
@@ -140,7 +140,7 @@ a {
 }
 
 .AGView {
-  background: url("https://adidas-website-images.s3.ap-south-1.amazonaws.com/public/images/AG_ground.jpeg") no-repeat center center; /* Specify your image path */
+  background: url("https://1fabucket.s3.ap-south-1.amazonaws.com/AG_ground.jpeg") no-repeat center center; /* Specify your image path */
   background-size: cover;
   height: 45vh;
   width: 100%;
@@ -350,28 +350,3 @@ button:hover {
   text-align: center;
   font-size: 18px;
 } */
-
-.Alert {
-  background-color: #f8d7da; /* Light red background */
-  color: #721c24; /* Dark red text */
-  border: 1px solid #f5c6cb; /* Red border */
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.Message {
-  margin-top: 15px; /* Space above message section */
-}
-
-.VideoSection {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.VideoSection video {
-  border-radius: 10px;
-  box-shadow: var(--ui-shadow);
-}
